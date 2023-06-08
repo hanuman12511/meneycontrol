@@ -4,20 +4,43 @@ import '../components/CardComponent.dart';
 class Home extends StatefulWidget {
   Home({super.key});
 
-  Map<String, dynamic> data = {
+  /* Map<String, dynamic> data = {
     "bank": [
       {"HDFC CARD", 50000, 30000, "but"},
       {"SBI-22 CARD", 30000, 20000, "but"},
       {"SBI-05 CARD", 60000, 27000, "but"}
     ]
+  }; */
+  Map<String, dynamic> data = {
+    "bank": [
+      {
+        "bank": "HDFC CARD",
+        "limit": 50000.0,
+        "expenses": 30000.0,
+      },
+      {
+        "bank": "SBI-2",
+        "limit": 50000.0,
+        "expenses": 30000.0,
+      },
+      {
+        "bank": "SBI-5",
+        "limit": 50000.0,
+        "expenses": 30000.0,
+      },
+    ]
   };
+
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   @override
-  addExpenses() {}
+  addExpenses() {
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -45,24 +68,27 @@ class _HomeState extends State<Home> {
               children: [
                 Container(
                   width: width * .88,
-                  height: height * .1,
                   padding: EdgeInsets.all(30),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 162, 197, 3),
+                    color: Color.fromARGB(255, 65, 79, 1),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Text("Hi Hanuman Ji !"),
+                  child: Text(
+                    "Hi Hanuman Ji !",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 249, 249, 247),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                widget.data['bank'].map((key, value) => value.forEach((v) {
-                      print(v);
-                      /* Container(
-                        child: CardComponent(
-                            bank: value,
-                            limit: 5000,
-                            expenses: 2000,
-                            btn: "oclick"),
-                      ); */
-                    }))
+                for (var i in widget.data['bank'])
+                  Container(
+                    child: CardComponent(
+                        bank: i['bank'],
+                        limit: i['limit'],
+                        expenses: i['expenses'],
+                        btn: "oclick"),
+                  ),
               ],
             ),
           ),

@@ -21,7 +21,15 @@ class _CardComponentState extends State<CardComponent> {
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.all(30),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 162, 197, 3),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment(0.8, 1),
+          colors: <Color>[
+            Color(0xff1f005c),
+            Color(0xff5b0060),
+          ],
+          tileMode: TileMode.mirror,
+        ),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(children: [
