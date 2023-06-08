@@ -28,6 +28,21 @@ class Home extends StatefulWidget {
         "limit": 50000.0,
         "expenses": 30000.0,
       },
+      {
+        "bank": "One",
+        "limit": 70000.0,
+        "expenses": 30000.0,
+      },
+      {
+        "bank": "RBL",
+        "limit": 70000.0,
+        "expenses": 30000.0,
+      },
+      {
+        "bank": "PNB",
+        "limit": 70000.0,
+        "expenses": 30000.0,
+      },
     ]
   };
 
