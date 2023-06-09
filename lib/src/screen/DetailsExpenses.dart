@@ -13,6 +13,11 @@ class _DetailsExpensesState extends State<DetailsExpenses> {
   Widget build(BuildContext context) {
     print("data=detals${widget.name}");
     return Scaffold(
+      appBar: AppBar(
+        leading: ElevatedButton(
+            child: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop()),
+      ),
       body: SafeArea(child: Text(widget.name['bank'])),
     );
   }
