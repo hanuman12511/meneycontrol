@@ -13,7 +13,7 @@ class _DetailsExpensesState extends State<DetailsExpenses> {
   Widget build(BuildContext context) {
     print("data=detals${widget.name}");
     return Scaffold(
-      body: Text("Detals"),
+      body: SafeArea(child: Text(widget.name['bank'])),
     );
   }
 }
