@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/CardComponent.dart';
+import 'AddExpenses.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -52,7 +53,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  addExpenses() {
+  expenses() {
+    print("expenses hanu");
+
     setState(() {});
   }
 
@@ -63,13 +66,16 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("Meney Control"),
         actions: [
-          FloatingActionButton(
-            onPressed: addExpenses,
-            child: Icon(
-              Icons.add_box,
-              size: 30,
-              color: Color.fromARGB(255, 228, 3, 3),
-            ),
+          ElevatedButton(
+            child: Text("add"),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  // Builder for the nextpage class's constructor.
+                  builder: (context) => AddExcepses(),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -102,7 +108,7 @@ class _HomeState extends State<Home> {
                         bank: i['bank'],
                         limit: i['limit'],
                         expenses: i['expenses'],
-                        btn: "oclick"),
+                        btn: () => expenses()),
                   ),
               ],
             ),

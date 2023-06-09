@@ -4,7 +4,7 @@ class CardComponent extends StatefulWidget {
   String? bank;
   double? limit;
   double? expenses;
-  String? btn;
+  void Function()? btn;
   CardComponent({this.bank, this.limit, this.expenses, this.btn});
 
   @override
@@ -92,11 +92,14 @@ class _CardComponentState extends State<CardComponent> {
                         color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 20),
                   ),
-                  Icon(
-                    Icons.remove_red_eye_rounded,
-                    size: 30,
-                    color: Color.fromARGB(255, 193, 3, 44),
-                  )
+                  ElevatedButton(
+                    onPressed: widget.btn,
+                    child: Icon(
+                      Icons.remove_red_eye_rounded,
+                      size: 30,
+                      color: Color.fromARGB(255, 193, 3, 44),
+                    ),
+                  ),
                 ],
               ),
             )
