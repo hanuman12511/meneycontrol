@@ -53,8 +53,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  expenses() {
-    print("expenses hanu");
+  expenses(dynamic n) {
+    print("expenses${n}");
 
     setState(() {});
   }
@@ -108,7 +108,7 @@ class _HomeState extends State<Home> {
                         bank: i['bank'],
                         limit: i['limit'],
                         expenses: i['expenses'],
-                        btn: () => expenses()),
+                        btn: () => expenses(i)),
                   ),
               ],
             ),

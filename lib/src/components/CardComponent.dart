@@ -4,7 +4,7 @@ class CardComponent extends StatefulWidget {
   String? bank;
   double? limit;
   double? expenses;
-  void Function()? btn;
+  dynamic Function()? btn;
   CardComponent({this.bank, this.limit, this.expenses, this.btn});
 
   @override
