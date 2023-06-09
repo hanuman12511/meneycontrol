@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DetailsExpenses extends StatefulWidget {
-  const DetailsExpenses({super.key});
+  dynamic name;
+  DetailsExpenses({super.key, this.name});
 
   @override
   State<DetailsExpenses> createState() => _DetailsExpensesState();
@@ -10,6 +11,7 @@ class DetailsExpenses extends StatefulWidget {
 class _DetailsExpensesState extends State<DetailsExpenses> {
   @override
   Widget build(BuildContext context) {
+    print("data=detals${widget.name}");
     return Scaffold(
       body: Text("Detals"),
     );

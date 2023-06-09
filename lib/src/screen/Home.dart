@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneycontrol/src/screen/DetailsExpenses.dart';
 import '../components/CardComponent.dart';
 import 'AddExpenses.dart';
 
@@ -55,6 +56,8 @@ class _HomeState extends State<Home> {
   @override
   expenses(dynamic n) {
     print("expenses${n}");
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => DetailsExpenses(name: n)));
 
     setState(() {});
   }
