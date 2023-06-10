@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:moneycontrol/src/screen/DetailsExpenses.dart';
 import '../components/CardComponent.dart';
+import '../components/CardPayment.dart';
 import 'AddExpenses.dart';
+import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
-
+  /* DateTime today = DateTime.now();
+  String dateStr = "${today.day}-${today.month}-${today.year}"; */
+  String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
   /* Map<String, dynamic> data = {
     "bank": [
       {"HDFC CARD", 50000, 30000, "but"},
@@ -19,21 +23,25 @@ class Home extends StatefulWidget {
         "bank": "HDFC CARD",
         "limit": 50000.0,
         "expenses": 30000.0,
+        "payDate": "2023-6-16"
       },
       {
         "bank": "SBI-2",
         "limit": 50000.0,
         "expenses": 30000.0,
+        "payDate": "2023-6-13"
       },
       {
         "bank": "SBI-5",
         "limit": 50000.0,
         "expenses": 30000.0,
+        "payDate": "2023-6-20"
       },
       {
         "bank": "One",
         "limit": 70000.0,
         "expenses": 30000.0,
+        "payDate": "2023-6-17"
       },
       {
         "bank": "RBL",
@@ -44,6 +52,7 @@ class Home extends StatefulWidget {
         "bank": "PNB",
         "limit": 70000.0,
         "expenses": 30000.0,
+        "payDate": "2023-6-16"
       },
     ]
   };
@@ -65,54 +74,109 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Meney Control"),
-        actions: [
-          ElevatedButton(
-            child: Text("add"),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  // Builder for the nextpage class's constructor.
-                  builder: (context) => AddExcepses(),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-      backgroundColor: Color.fromARGB(255, 248, 247, 246),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: const TabBar(tabs: [
+            Tab(
+              icon: Icon(
+                Icons.payments_rounded,
+              ),
+              child: Text("Expenses"),
+            ),
+            Tab(
+              icon: Icon(Icons.payment_rounded),
+              child: Text("Payment"),
+            )
+          ]),
+          title: const Text("Meney Control"),
+          actions: [
+            ElevatedButton(
+              child: const Text("add"),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    // Builder for the nextpage class's constructor.
+                    builder: (context) => const AddExcepses(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        backgroundColor: Color.fromARGB(255, 248, 247, 246),
+        body: SafeArea(
+          child: Center(
+            child: TabBarView(
               children: [
                 Container(
-                  width: width * .88,
-                  padding: EdgeInsets.all(30),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 65, 79, 1),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Text(
-                    "Hi Hanuman Ji !",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 249, 249, 247),
-                      fontWeight: FontWeight.bold,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: width * .88,
+                          padding: EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 65, 79, 1),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: const Text(
+                            "Hi Hanuman Ji !",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 249, 249, 247),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        for (var i in widget.data['bank'])
+                          Container(
+                            child: CardComponent(
+                                bank: i['bank'],
+                                limit: i['limit'],
+                                expenses: i['expenses'],
+                                btn: () => expenses(i)),
+                          ),
+                      ],
                     ),
                   ),
                 ),
-                for (var i in widget.data['bank'])
-                  Container(
-                    child: CardComponent(
-                        bank: i['bank'],
-                        limit: i['limit'],
-                        expenses: i['expenses'],
-                        btn: () => expenses(i)),
+                Container(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: width * .88,
+                          padding: EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 65, 79, 1),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Text(
+                            "Hi Hanuman Ji ! ${widget.currentDate}",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 249, 249, 247),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        for (var i in widget.data['bank'])
+                          Container(
+                            child: CardPayment(
+                                bank: i['bank'],
+                                limit: i['limit'],
+                                expenses: i['expenses'],
+                                payDate: i['payDate'],
+                                btn: () => expenses(i)),
+                          ),
+                      ],
+                    ),
                   ),
+                ),
               ],
             ),
           ),
