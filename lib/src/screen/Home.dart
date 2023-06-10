@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
               child: Text("Expenses"),
             ),
             Tab(
-              icon: Icon(Icons.payment_rounded),
+              icon: Icon(Icons.date_range),
               child: Text("Payment"),
             )
           ]),
